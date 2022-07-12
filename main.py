@@ -27,9 +27,10 @@ links = soup.select(selector='div.list-card-info a')
 addresses = soup.find_all(name='address', class_='list-card-addr')
 prices = soup.find_all(name='div', class_='list-card-price')
 
+driver = webdriver.Chrome(service=Service(CHROME_DRIVER_PATH))
+
 ## write to Google Sheets
 for x in range(len(addresses)):
-    driver = webdriver.Chrome(service=Service(CHROME_DRIVER_PATH))
     driver.get(FORM_URL)
     time.sleep(2)
 
@@ -44,4 +45,4 @@ for x in range(len(addresses)):
 
     driver.find_element(By.XPATH, '/html/body/div/div[2]/form/div[2]/div/div[3]/div[1]/div[1]/div/span/span').click()
 
-    driver.quit()
+driver.quit()
